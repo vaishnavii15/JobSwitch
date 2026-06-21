@@ -1,8 +1,14 @@
 ﻿namespace PrepInterview.Topics.Memory
 {
-    [Topic("Memory", "Value vs Reference Types")]
+    [Topic("Memory", "Value vs Reference Types && Boxing Unboxing")]
     public class ValueVsReference: IRunnable
     {
+        //1. Value types
+        //2. Referance Types
+        //3. String Referance Types
+        //4. Both passed into method
+        //5. Ref keyword
+        //6. Boxing nd unboxing
         public void Run() 
         { 
             Console.WriteLine("=== Value Types ===");
@@ -19,6 +25,9 @@
 
             Console.WriteLine("\n\n=== Ref Keyword ===");
             Refkeyword();
+
+            Console.WriteLine("\n\n=== Boxing and Unboxing ===");
+            BoxingAndUnboxingImplementation();
         }
 
 
@@ -94,6 +103,24 @@
         void ModifyRef(ref int x)
         {
             x = 200;
+        }
+
+
+
+        void BoxingAndUnboxingImplementation()
+        {
+            int val = 100;
+
+            object boxed = val;
+            Console.WriteLine($"\nBoxed = boxed: {boxed}");
+
+            Console.WriteLine("\nBoxing: Converting a value type into a reference type (object). Implicite conversion");
+
+            int unboxed = (int)boxed;
+            Console.WriteLine($"\n\nUnboxed = unboxed: {unboxed}");
+
+            Console.WriteLine("\nUnboxing: Extracting the value type from the object. Explicite conversion");
+
         }
     }
 
