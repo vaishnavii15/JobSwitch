@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/JobSwitchsln/ConsoleApp1/obj
+/JobSwitchsln/ConsoleApp1/bin/Debug/net8.0
+/JobSwitchsln/.vs
