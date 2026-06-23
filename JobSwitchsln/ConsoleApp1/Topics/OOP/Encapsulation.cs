@@ -31,4 +31,11 @@ namespace ReviseConcepts.Topics.OOP
             employeeSalary += amount;
         }
     }
+
+    //Public - can be accessed anywhere,
+    //Private - can be accessed in same class,
+    //Protected - can be accessed only in derived classes,
+    //Internal - cannot be accessed outside dll,
+    //Protected Internal - can be accessed in same dll OR in derived class,
+    //Private Protected - can be accessed in same class or in derived class.
 }
