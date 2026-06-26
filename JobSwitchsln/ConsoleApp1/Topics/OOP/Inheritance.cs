@@ -26,6 +26,8 @@ namespace ReviseConcepts.Topics.OOP
 
             Animal pd = new PoliceDog("K9");
             Console.WriteLine($"{pd.Describe()} -> {pd.Speak()}");
+
+            //Dog d = new Animal("Buddy"); // compiler error- because not every animal is dog 
         }
     }
 
