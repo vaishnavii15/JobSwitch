@@ -2,7 +2,7 @@
 
 namespace ReviseConcepts.Topics.CodingQuePractise
 {
-    [Topic("Coding Questions", "C#")]
+    [Topic("Coding Questions", "1C#")]
     public class CodingQues: IRunnable
     {
         public void Run() 
@@ -25,6 +25,10 @@ namespace ReviseConcepts.Topics.CodingQuePractise
             RevWordsInSentence("Vaishnavi is Great");
 
             FirstSingleChar("aabbcde");
+
+            FindDuplicates("Vaishnavi");
+
+            IsAllDigit("63871364a4");
         }
 
 
@@ -205,13 +209,39 @@ namespace ReviseConcepts.Topics.CodingQuePractise
 
 
         // First non-repeating character
+        // use groupby and first having count = 1
         void FirstSingleChar(string s)
         {
             Console.WriteLine("\n\n\n");
-            var ans = s.GroupBy(c => c)
-            .FirstOrDefault(g => g.Count() == 1)?.Key ?? '\0';
+
+            var ans = s.GroupBy(c => c).FirstOrDefault(g => g.Count() == 1)?.Key ?? '\0';
 
             Console.WriteLine($"First non-repeating character is: {ans}");
         }
+
+
+
+        // Find Duplicates
+        // just groupby, and where count > 1, those are duplicate
+        void FindDuplicates(string s)
+        {
+            Console.WriteLine("\n\n\n");
+
+            s.GroupBy(c => c).Where(g => g.Count() > 1).ToList().ForEach(g => Console.Write(g.Key + " "));
+        }
+
+
+
+        // Check if string contains only digit
+        // char.IsDigit
+        void IsAllDigit(string s)
+        {
+            Console.WriteLine("\n\n\n");
+
+            var ans = s.All(char.IsDigit);
+
+            Console.WriteLine($"IsAllDigit: {ans}");
+        }
+
     }
 }
