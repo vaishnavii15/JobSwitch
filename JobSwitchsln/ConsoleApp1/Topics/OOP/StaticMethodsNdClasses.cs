@@ -55,6 +55,12 @@ namespace ReviseConcepts.Topics.OOP
             Child1 p1 = new Child1();
             Console.Write("Child reference: ");
             p1.Method();
+
+            Console.WriteLine("\n\n");
+
+            //8
+            Console.WriteLine(StringExtention.IsEmpty(""));
+
         }
     }
 
@@ -149,7 +155,7 @@ namespace ReviseConcepts.Topics.OOP
 
 
 
-    //7- New Keyword implementation
+    //7 - New Keyword implementation
     public class Parent
     {
         public void Method() => Console.WriteLine("Parent");
@@ -158,5 +164,28 @@ namespace ReviseConcepts.Topics.OOP
     public class Child1: Parent
     {
         public new void Method() => Console.WriteLine("Child");
+    }
+
+
+
+    //8 - Extention Methods
+    // must live in a static class
+    // method must be static
+    public static class StringExtention
+    {
+        public static bool IsEmpty(this string s)
+        {
+            return s.Length == 0;
+        }
+
+        public static string Shout(this string s)
+        {
+            return s.ToUpper() + "!";
+        }
+
+        public static string StringRepeat(this string s, int n)
+        {
+            return string.Concat(Enumerable.Repeat(s, n));
+        }
     }
 }
