@@ -1,4 +1,5 @@
 ﻿using PrepInterview;
+using System.Text;
 
 namespace ReviseConcepts.Topics.CodingQuePractise
 {
@@ -23,6 +24,11 @@ namespace ReviseConcepts.Topics.CodingQuePractise
             ReplaceOccurance("good", "boy");
 
             CheckIfSubstring("abcccd", "cc");
+
+            CompressedString("aaaabcccdddde");
+
+            var isValidParenthese = ValidParentheses("{{{(())}}}");
+            Console.WriteLine($"Is this valid parenthese: {isValidParenthese}");
         }
 
         // Count words in string 
@@ -156,6 +162,62 @@ namespace ReviseConcepts.Topics.CodingQuePractise
             var ans = a.Contains(b);
 
             Console.WriteLine($"Is b substring of a: {ans}");
+        }
+
+
+
+        // Compress a string 
+        void CompressedString(string s)
+        {
+            Console.WriteLine("\n\n\n");
+            var newStr = new StringBuilder();
+
+            int i = 0;
+
+            while (i < s.Length)
+            {
+                char c = s[i];
+                int count = 0;
+
+                while (i < s.Length && s[i] == c)
+                {
+                    count++;
+                    i++;
+                }
+                newStr.Append(c).Append(count > 1 ? count.ToString() : "");
+            }
+            Console.WriteLine($"CompressedString: {newStr}");
+        }
+
+
+
+        // Check if Parantheses are balanced
+
+        bool ValidParentheses(string s)
+        {
+            Console.WriteLine("\n\n\n");
+
+            var stack = new Stack<char>();
+
+            foreach(char c in s)
+            {
+                if (c =='(' || c == '{' || c == '[')
+                {
+                    stack.Push(c);
+                }
+                else if (c == ')' || c == '}' || c == ']')
+                {
+                    if (stack.Count() == 0) return false;
+
+                    char top = stack.Pop();
+
+                    if (c == ')' && top != '(') return false;
+                    if (c == '}' && top != '{') return false;
+                    if (c == ']' && top != '[') return false;
+                }
+
+            }
+            return stack.Count() == 0;
         }
     }
 }
