@@ -155,7 +155,7 @@ namespace ReviseConcepts.Topics.OOP
 
 
 
-    //7 - New Keyword implementation
+    //7 - New Keyword implementation / Method hiding 
     public class Parent
     {
         public void Method() => Console.WriteLine("Parent");
