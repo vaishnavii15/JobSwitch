@@ -7,23 +7,30 @@ namespace ReviseConcepts.Topics.OOP
     {
         public void Run()
         {
+            //1
             //Animal a = new Animal(); // Gives error 
 
+            //2
             Dog d = new Dog("Buddy");
             Console.WriteLine($"{d.Describe()} -> {d.Speak()}, Loves: {d.LovesDoing()}");
 
+            //Dog b = new Animal(); // Child cannot create instance of base.
+
             Console.WriteLine("\n\n");
 
+            //3
             Cat c = new Cat("Whiskers");
             Console.WriteLine($"{c.Describe()} -> {c.Speak()}, Loves: {c.LovesDoing()}");
 
             Console.WriteLine("\n\n");
 
+            //4
             Animal gd = new GuideDog("Mufasa");
             Console.WriteLine($"{gd.Describe()} -> {gd.Speak()}");
 
             Console.WriteLine("\n\n");
 
+            //5
             Animal pd = new PoliceDog("K9");
             Console.WriteLine($"{pd.Describe()} -> {pd.Speak()}");
 
@@ -31,11 +38,10 @@ namespace ReviseConcepts.Topics.OOP
         }
     }
 
-
+    // 1 - Abstract class/ method, Virtual method
     // abstract class — cannot be instantiated, can contain non-abstract methods, outer abstract class cannot be private, inner can
     // abstract method — no body, subclass MUST override, cannot be declared in non-abstract class, cannot be private
     // virtual method  — has default body, subclass MAY override, cannot be private
-
     public abstract class Animal
     {
         public string Name { get; set; }
@@ -45,7 +51,7 @@ namespace ReviseConcepts.Topics.OOP
             Name = name; 
         }
 
-        public abstract string Speak();
+        public abstract string Speak(); // cannot contain body
 
         public virtual string Describe() => $"I am {Name}";
 
@@ -54,6 +60,7 @@ namespace ReviseConcepts.Topics.OOP
 
 
 
+    // 2 - Inheritance in child and Sealed method
     // Inherits Animal, implements Speak, keeps Describe as-is
     public class Dog: Animal
     {
@@ -69,6 +76,7 @@ namespace ReviseConcepts.Topics.OOP
 
 
 
+    // 3 - Calling base 
     // Overrides both Speak AND Describe
     // base.Describe() reuses parent logic, then extends it
     public class Cat: Animal
@@ -82,6 +90,7 @@ namespace ReviseConcepts.Topics.OOP
 
 
 
+    // 4 - Sealed cannot be invoked later
     // Third level: GuideDog → Dog → Animal
     // base.Speak() calls Dog's version, not Animal's
     public class GuideDog: Dog
@@ -96,6 +105,8 @@ namespace ReviseConcepts.Topics.OOP
 
 
 
+
+    // 5 - Sealed class
     // sealed — nobody can inherit from PoliceDog,
     // can inherit from others, object can be created
     // outer sealed cannot be private, inner sealed can
