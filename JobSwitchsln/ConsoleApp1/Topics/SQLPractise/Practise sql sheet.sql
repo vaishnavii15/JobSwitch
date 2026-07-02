@@ -129,4 +129,49 @@ SELECT customername, expense,
 sum(expense) over (order by customerid rows unbounded preceding) as RunningTotal
 FROM Customers
 
--- 25 question done 
+
+
+-- Show each customer's expense and the previous customer's expense in a single row
+
+SELECT customername, expense, 
+lag(expense, 1, 0) over (order by customerid) as PreviousExpense 
+from Customers;
+
+
+
+-- Rank products by price descending using RANK, DENSE_RANK, ROW_NUMBER
+
+SELECT productname, 
+ROW_NUMBER() over (order by productprice) as RowNumber,
+RANK() over (order by productprice) as rnk,
+DENSE_RANK() over (order by productprice) as DenseRank
+FROM Products;
+
+
+
+-- Show customers with row numbers per expense group.
+
+select row_number() over (partition by expense order by customerid) as rn,
+       customername, expense
+from Customers
+
+
+
+--  Find customers who share the same expense amount.
+
+SELECT * FROM Customers where expense 
+in (Select expense from Customers Group by expense having COUNT(*) > 1);
+
+SELECT * FROM Customers c1
+JOIN Customers c2 ON c1.expense = c2.expense 
+where c1.customerid != c2.customerid;
+
+
+
+-- Total expense per customer, sorted highest first.
+
+SELECT customername, SUM(expense) as TotalExpense 
+FROM Customers Group by customername
+order by TotalExpense desc;
+
+-- 30 questions done
