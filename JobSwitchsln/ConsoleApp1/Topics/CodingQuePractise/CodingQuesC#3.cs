@@ -14,6 +14,13 @@ namespace ReviseConcepts.Topics.CodingQuePractise
             ReverseVowels("hello");
 
             UpperAndLowercase("Hello World");
+
+            Console.WriteLine("\n\n\n");
+
+            FindAllPermutations("abc");
+
+            var a = ConvertToInt("1234");
+            Console.WriteLine(a);
         }
 
 
@@ -76,6 +83,36 @@ namespace ReviseConcepts.Topics.CodingQuePractise
             var upperCount = s.Count(char.IsUpper);
 
             Console.WriteLine($"Upper count: {upperCount}, Lower count: {lowerCount}");
+        }
+
+
+
+        // Find All Permutations of a String
+
+        void FindAllPermutations(string s, string result = "")
+        {
+            if (s.Length == 0) { Console.Write(result + " "); return; }
+
+            for (int i = 0; i< s.Length; i++)
+            {
+                FindAllPermutations(s.Remove(i, 1), result + s[i]);
+            }
+        }
+
+
+
+        // Convert a String to Integer
+        int ConvertToInt(string s)
+        {
+            Console.WriteLine("\n\n\n");
+
+            int result = 0;
+            bool neg = s[0] == '-';
+            int start = neg ? 1 : 0;
+
+            for (int i = start; i < s.Length; i++)
+                result = result * 10 + (s[i] - '0');
+            return neg ? -result : result;
         }
     }
 }
