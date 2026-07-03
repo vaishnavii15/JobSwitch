@@ -174,4 +174,49 @@ SELECT customername, SUM(expense) as TotalExpense
 FROM Customers Group by customername
 order by TotalExpense desc;
 
--- 30 questions done
+
+
+
+
+-- Get the customer count per month in 2023.
+
+SELECT Month(createdate) as Month, Count(*) FROM Customers
+where Year(createdate) = '2023' 
+Group by Month(createdate) order by Month
+
+
+
+-- Find products that no customer has purchased.
+
+SELECT p.* FROM Products p 
+LEFT JOIN Customers c On p.productbuyerid = c.customerid 
+where c.customerid is null;
+
+
+
+-- Get top 2 most expensive products per buyer.
+
+With cte as(
+SELECT productbuyerid, productname, productprice, DENSE_RANK() over (partition by productbuyerid order by productprice desc) as rnk from Products)
+
+SELECT c.customername, t.productname, t.productprice FROM cte t
+JOIN Customers c on t.productbuyerid = c.customerid where t.rnk <=2
+
+
+
+-- Find all transactions that have no sender or receiver (still 'Empty').
+
+SELECT * FROM Transactions where transactionto = 'Empty' and transactionfrom = 'Empty'
+
+
+
+-- Use COALESCE and ISNULL to handle NULLs on Customer name.
+
+SELECT customername, 
+ISNULL(customername, 'Unknown') as WithIsNull,
+COALESCE(null, customername, 'Default') as WithColesce
+FROM Customers
+
+
+
+-- 35 questions done
