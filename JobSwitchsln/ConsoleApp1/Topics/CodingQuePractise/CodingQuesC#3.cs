@@ -21,6 +21,14 @@ namespace ReviseConcepts.Topics.CodingQuePractise
 
             var a = ConvertToInt("1234");
             Console.WriteLine(a);
+
+            CheckIfStringsAreEqual("Hello", "hello");
+
+            LongestPrefix(["flower", "flow", "flight"]);
+
+            NWords("The quick brown fox", 2);
+
+            IsValidEmail("vaishnaviidayal15@gmail.com");
         }
 
 
@@ -113,6 +121,65 @@ namespace ReviseConcepts.Topics.CodingQuePractise
             for (int i = start; i < s.Length; i++)
                 result = result * 10 + (s[i] - '0');
             return neg ? -result : result;
+        }
+
+
+
+        // Check if Two Strings are Equal Ignoring Case
+        void CheckIfStringsAreEqual(string s1, string s2)
+        {
+            Console.WriteLine("\n\n\n");
+
+            var ans = s1.ToLower() == s2.ToLower();
+
+            Console.WriteLine($"Are both strings equal: {ans}");
+        }
+
+
+
+        // Find the Longest Common Prefix
+
+        void LongestPrefix(string[] s)
+        {
+            Console.WriteLine("\n\n\n");
+
+            string prefix = s[0];
+
+            foreach(var i in s)
+            {
+                while (!i.StartsWith(prefix))
+                {
+                    prefix = prefix.Substring(0, prefix.Length - 1);
+                }
+            }
+
+            Console.WriteLine($"Longest Prefix is: {prefix}");
+        }
+
+
+
+        // Truncate a String to N Words
+        void NWords(string s, int n)
+        {
+            Console.WriteLine("\n\n\n");
+
+            var splitted = s.Split(' ');
+
+            var ans = string.Join(" ", splitted.Take(n));
+
+            Console.WriteLine($"Taking {n} words from string is: {ans}");
+        }
+
+
+
+        // Check if a String is a Valid Email (Basic Check)
+        void IsValidEmail(string email)
+        {
+            Console.WriteLine("\n\n\n");
+
+            var ans = email.Contains("@") && email.Contains(".com");
+
+            Console.WriteLine($"Is the given email valid? : {ans}");
         }
     }
 }
