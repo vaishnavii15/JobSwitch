@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="ConsoleApp1/ReviseConcepts.csproj" />
+  <Project Path="MVCApplication/MVCApplication.csproj" Id="d2472ca8-81ca-42b9-8dfc-fac04b502ebc" />
 </Solution>
