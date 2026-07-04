@@ -219,4 +219,84 @@ FROM Customers
 
 
 
--- 35 questions done
+-- Format expense and date using CAST and CONVERT.
+
+SELECT customername, 
+	CAST (expense as int) as IntExpense, 
+	'$' + cast(cast(expense as int) as varchar) as FormattedExpense,
+	CONVERT(varchar, createdate, 103) as DateDMY
+FROM Customers; 
+
+
+
+-- UPSERT — update customer if exists, insert if not.
+
+declare @uid int = 15, @uName varchar(50) = 'Avishkar', @uex money = 55
+
+If exists (SELECT 1 from Customers where customerid = @uid)
+	BEGIN
+		update Customers 
+		SET customername = @uName, expense = @uex
+		where customerid = @uid
+	END
+	
+ELSE 
+	BEGIN 
+		Insert into Customers
+		VALUES (@uid, @uName, @uex, GETDATE())
+	END
+
+
+
+-- Write a stored procedure to insert a customer.
+GO
+CREATE OR ALTER procedure sp_AddCustomer
+	@cid int, 
+	@cname varchar(20),
+	@ex money,
+	@date date
+as 
+BEGIN 
+	INSERT INTO Customers 
+	Values (@cid, @cname, @ex, @date)
+END
+
+
+execute sp_AddCustomer @cid=30, @cname='Vikram', @ex=75, @date='2024-01-01'
+
+GO
+
+-- Stored procedure to return the Nth highest product price.
+
+CREATE OR ALTER procedure sp_NthHighestPrice
+	@nth int
+as
+BEGIN
+	with cte as (
+	SELECT productname, DENSE_RANK() over (order by productprice desc) as rnk FROM Products)
+
+	SELECT productname from cte where rnk = @nth
+END
+
+execute sp_NthHighestPrice 2
+
+
+
+-- Transaction with TRY/CATCH that rolls back on error.
+
+begin try
+	begin transaction 
+		INSERT INTO Customers values (9,'Ashwini',100,'2024-01-01')
+			
+		INSERT INTO Customers values (99,'Duplicate',100,'2024-01-01')
+	commit transaction
+
+end try 
+
+begin catch
+	rollback transaction 
+	SELECT ERROR_MESSAGE() as ErrorMessage
+end catch
+
+
+-- 40 question done
