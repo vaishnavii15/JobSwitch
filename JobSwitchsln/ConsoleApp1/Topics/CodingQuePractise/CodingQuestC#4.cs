@@ -16,6 +16,16 @@ namespace ReviseConcepts.Topics.CodingQuePractise
             ShortestWord("The quick brown fox & he is cute");
 
             RemoveNonAlNum("Hello, World! 123");
+
+            IsPrefix("programming", "prog");
+
+            IsSuffix("programming", "ingg");
+
+            NTimesString("ab", 3);
+
+            CapitalizeFirstWord("hello WORLD");
+
+            MoreThanOnce("the cat sat on the mat the");
         }
 
         // Count the Number of Sentences in a Paragraph
@@ -79,6 +89,75 @@ namespace ReviseConcepts.Topics.CodingQuePractise
             var ans = new String(s.Where(char.IsLetterOrDigit).ToArray());
 
             Console.WriteLine($"String after removing all non alphanmeric characters: {ans}");
+        }
+
+
+
+        // Check if One String is a Prefix of Another
+        //"programming", "prog" → true
+        void IsPrefix(string a, string b)
+        {
+            Console.WriteLine("\n\n\n");
+
+            var ans = a.StartsWith(b);
+
+            Console.WriteLine($"Is {b} prefix of {a}: {ans}");
+        }
+
+
+
+
+        // Check if One String is a Suffix of Another
+        void IsSuffix(string a, string b)
+        {
+            Console.WriteLine("\n\n\n");
+
+            var ans = a.EndsWith(b);
+
+            Console.WriteLine($"Is {b} suffix of {a}: {ans}");
+        }
+
+
+
+        // Repeat a String N Times
+        void NTimesString(string s, int n)
+        {
+            Console.WriteLine("\n\n\n");
+
+            String ans = "";
+
+            for (int i = 0; i < n; i++)
+            {
+                ans += s;
+            }
+
+            Console.WriteLine($"N times string is: {ans}");
+        }
+
+
+
+        // Capitalize the First Letter Only
+
+        void CapitalizeFirstWord(string s)
+        {
+            Console.WriteLine("\n\n\n");
+
+            var ans = char.ToUpper(s[0]) + s.Substring(1).ToLower();
+
+            Console.WriteLine($"First letter capitalized: {ans}");
+        }
+
+
+
+        // Find All Words That Appear More Than Once
+
+        void MoreThanOnce(string s)
+        {
+            Console.WriteLine("\n\n\n");
+
+            var ans = s.ToLower().Split(' ').GroupBy(c => c).Where(g => g.Count() > 1).Select(g => g.Key).ToList();
+
+            Console.WriteLine($"Words appearing more than once: {ans.FirstOrDefault()}");
         }
     }
 }
