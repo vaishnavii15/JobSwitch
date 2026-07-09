@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace MVCApplication.Models;
+﻿namespace MVCApplication.Models;
 
 public partial class InterviewRound
 {
