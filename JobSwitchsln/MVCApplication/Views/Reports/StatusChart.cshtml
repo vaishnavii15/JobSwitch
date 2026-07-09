@@ -1,0 +1,67 @@
+﻿@using System.Text.Json
+@{
+    ViewData["Title"] = "Interview Status Chart";
+
+    var labels = JsonSerializer.Serialize(ViewBag.StatusLabels);
+    var counts = JsonSerializer.Serialize(ViewBag.StatusCounts);
+
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">Interview Status Chart</h2>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Back</a>
+</div>
+
+@if (ViewBag.StatusLabels == null || ViewBag.StatusLabels.Count == 0)
+{
+    <div class="alert alert-info">
+        No interview entries found yet. Add interviews first to see the chart.
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-7 col-lg-6">
+            <canvas id="statusChart"></canvas>
+        </div>
+
+    </div>
+}
+
+
+@section Scripts{
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <script>
+        const labels = @Html.Raw(labels);
+        const counts = @Html.Raw(counts);
+
+        if (labels.length > 0) {
+        new Chart(document.getElementById('statusChart'), {
+        type: 'pie',
+        data: {
+        labels: labels,
+        datasets: [{
+        data: counts,
+        backgroundColor: [
+        '#0d6efd',
+        '#198754',
+        '#ffc107',
+        '#dc3545',
+        '#6f42c1',
+        '#20c997'
+        ]
+        }]
+        },
+        options: {
+        responsive: true,
+        plugins: {
+        legend: {
+        position: 'bottom'
+        }
+        }
+        }
+        });
+        }
+    </script>
+}
