@@ -18,6 +18,16 @@ namespace ReviseConcepts.Topics.CodingQuePractise
             FindMiddleChar("abcdef");
 
             CamelCase("hello world foo");
+
+            CountMatchingIndexedChars("abcde", "axcye");
+
+            RemoveOccuranceOf("Hello World", 'o');
+
+            IsOnlyAlpha("Hell");
+
+            SplitString("a,b;c|d");
+
+            CountSubstring("abcabcabc", "abc");
         }
 
 
@@ -103,6 +113,78 @@ namespace ReviseConcepts.Topics.CodingQuePractise
 
 
             Console.WriteLine($"CamelCased string: {ans}");
+        }
+
+
+
+        // Count Matching Characters Between Two Strings (Same Position)
+
+        void CountMatchingIndexedChars(string a, string b)
+        {
+            Console.WriteLine("\n\n\n");
+
+            var ans = a.Zip(b, (x, y) => x == y).Count(match => match);
+
+            Console.WriteLine($"The place at which both of the strings have similar characters is: {ans}");
+        }
+
+
+
+        // Remove All Occurrences of a Given Character
+
+        void RemoveOccuranceOf(string s, char x)
+        {
+            Console.WriteLine("\n\n\n");
+
+            var ans = new string(s.Where(c => c != x).ToArray());
+
+            Console.WriteLine($"String without {x} is: {ans}");
+        }
+
+
+
+        //  Check if String Contains Only Alphabets
+        void IsOnlyAlpha(string s)
+        {
+            Console.WriteLine("\n\n\n");
+
+            var ans = s.All(char.IsLetter);
+
+            Console.WriteLine($"Does the string contains only alphabets: {ans}");
+        }
+
+
+
+        // Split a String by Multiple Delimiters
+
+        void SplitString(string s)
+        {
+            Console.WriteLine("\n\n\n");
+
+            var ans = s.Split(new char[] { ',', ';', '|' }, StringSplitOptions.RemoveEmptyEntries);
+
+            Console.WriteLine($"Splitted string:\n");
+
+            foreach(var a in ans)
+            {
+                Console.Write(a);
+            }
+
+        }
+
+
+
+        // Count How Many Times a Substring Appears
+
+        void CountSubstring(string s, string sub)
+        {
+
+            Console.WriteLine("\n\n\n");
+
+            int count = 0, index = 0;
+            while ((index = s.IndexOf(sub, index)) != -1) { count++; index += sub.Length; }
+
+            Console.WriteLine(count);
         }
     }
 }
